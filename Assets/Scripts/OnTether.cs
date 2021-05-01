@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OnTether : MonoBehaviour
 {
-    void Update ()
+    void Update()
     {
         // Code for OnMouseDown in the iPhone. Unquote to test.
         RaycastHit hit = new RaycastHit();
