@@ -15,12 +15,6 @@ public class ObjectPool : MonoBehaviour
     void Awake()
     {
         SharedInstance = this;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        Debug.Log("Starting Object Pool for " + amountToPool + " objects.");
         pooledObjects = new List<GameObject>();
         GameObject tmp;
 
@@ -30,7 +24,12 @@ public class ObjectPool : MonoBehaviour
             tmp.SetActive(false);
             pooledObjects.Add(tmp);
         }
-        
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        Debug.Log("Starting Object Pool for " + amountToPool + " objects.");
     }
 
     public GameObject GetPooledObject()
@@ -43,5 +42,10 @@ public class ObjectPool : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public List<GameObject> GetPooledObjects()
+    {
+        return pooledObjects;
     }
 }
