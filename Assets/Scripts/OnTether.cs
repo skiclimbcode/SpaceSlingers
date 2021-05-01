@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class OnTether : MonoBehaviour
 {
     void Update ()
     {
@@ -18,5 +18,5 @@ public class Player : MonoBehaviour
             }
         }
     }
-    
+
 }
