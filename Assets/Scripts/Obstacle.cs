@@ -17,7 +17,7 @@ public class Obstacle : MonoBehaviour
     {
         Debug.Log("Added Obstacle!");
         // Making it smaller since the PNG is pretty huge
-        transform.localScale -= new Vector3(.6f, .6f, .6f);
+        // transform.localScale -= new Vector3(.6f, .6f, .6f);
     }
 
     // Update is called once per frame
