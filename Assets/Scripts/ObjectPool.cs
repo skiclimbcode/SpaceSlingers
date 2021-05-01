@@ -20,6 +20,7 @@ public class ObjectPool : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("Starting Object Pool for " + amountToPool + " objects.");
         pooledObjects = new List<GameObject>();
         GameObject tmp;
 
