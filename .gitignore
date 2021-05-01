@@ -43,6 +43,10 @@ ExportedObj/
 *.opendb
 *.VC.db
 UserSettings/EditorUserSettings.asset
+UserSettings/EditorUserSettings.asset
+UserSettings/**
+UserSettings/*
+/[Uu]ser[Ss]ettings/
 
 # Unity3D generated meta files
 *.pidb.meta

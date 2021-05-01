@@ -6,6 +6,7 @@ public class Obstacle : MonoBehaviour
 {
 
     private Rigidbody2D rb;
+    public float moveSpeed = 2f;
 
     void Awake()
     {
@@ -21,8 +22,8 @@ public class Obstacle : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        rb.velocity = new Vector2(moveSpeed * -1, rb.velocity.y);
     }
 }
