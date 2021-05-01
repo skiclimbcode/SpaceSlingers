@@ -14,6 +14,7 @@ public class OnTether : MonoBehaviour
                 Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(i).position);
                 if (Physics.Raycast(ray, out hit)) {
                     hit.transform.gameObject.SendMessage("OnMouseDown");
+                    Debug.Log("Detected mouse click!");
                 }
             }
         }
