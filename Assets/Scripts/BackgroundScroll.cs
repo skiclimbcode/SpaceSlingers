@@ -7,8 +7,8 @@ public class BackgroundScroll : MonoBehaviour
     public Material material;
     public Vector2 offset;
 
-    public int xVelocity;
-    public int yVelocity;
+    public float xVelocity;
+    public float yVelocity;
 
     void Awake()
     {
