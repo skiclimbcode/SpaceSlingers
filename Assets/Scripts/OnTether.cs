@@ -4,20 +4,39 @@ using UnityEngine;
 
 public class OnTether : MonoBehaviour
 {
+    private Obstacle obstacleToTetherTo;
+
+    [SerializeField]
+    private float orbitSpeed = 100.0f;
+    
     void Update()
     {
-        // Code for OnMouseDown in the iPhone. Unquote to test.
-        RaycastHit hit = new RaycastHit();
-        for (int i = 0; i < Input.touchCount; ++i) {
-            if (Input.GetTouch(i).phase.Equals(TouchPhase.Began)) {
-                // Construct a ray from the current touch coordinates
-                Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(i).position);
-                if (Physics.Raycast(ray, out hit)) {
-                    hit.transform.gameObject.SendMessage("OnMouseDown");
-                    Debug.Log("Detected mouse click!");
-                }
-            }
+        // Get initial click/touch to find nearest obstacle to tether to
+        if (Input.GetMouseButtonDown(0) || Input.touchCount > 0) {
+            obstacleToTetherTo = FindClosestObstacle();
+            Debug.Log("Closest obstacle at position = " + obstacleToTetherTo.gameObject.transform.position);
+        }
+        if (Input.GetMouseButton(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Stationary)) {
+            // While user is holding button down, begin to orbit
+            transform.RotateAround(obstacleToTetherTo.gameObject.transform.position, Vector3.forward, orbitSpeed * Time.deltaTime);
         }
     }
 
+    Obstacle FindClosestObstacle()
+    {
+        float distanceToClosestObstacle = Mathf.Infinity;
+        Obstacle closestObstacle = null;
+        Obstacle[] allObstacles = GameObject.FindObjectsOfType<Obstacle>();
+
+        foreach (Obstacle currentObstacle in allObstacles) {
+            float distanceToObstacle = (currentObstacle.transform.position - this.transform.position).sqrMagnitude;
+            if (distanceToObstacle < distanceToClosestObstacle) {
+                distanceToClosestObstacle = distanceToObstacle;
+                closestObstacle = currentObstacle;
+            }
+        }
+        // for debugging purposes
+        Debug.DrawLine (this.transform.position, closestObstacle.transform.position);
+        return closestObstacle;
+    }
 }
