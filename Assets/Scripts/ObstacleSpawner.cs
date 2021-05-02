@@ -76,23 +76,27 @@ public class ObstacleSpawner : MonoBehaviour
         if (locations.Count < gameObjects.Count)
             Debug.LogWarning("There are not enough locations for all the gameObjects. Some won't spawn.");
 
+        StartCoroutine(ActivateObstacle(remainingGameObjects, freeLocations));
+    }
+
+    private IEnumerator ActivateObstacle(List<GameObject> remainingGameObjects, List<Vector3> freeLocations)
+    {
         while (remainingGameObjects.Count > 0)
         {
             int gameObjectIndex = Random.Range(0, remainingGameObjects.Count);
             int locationIndex = Random.Range(0, freeLocations.Count);
-            ActivateObstacle(gameObjects[gameObjectIndex], locations[locationIndex]);
+            Debug.Log("Activating obstacle!");
+            ActivateObject(remainingGameObjects[gameObjectIndex], freeLocations[locationIndex]);
             remainingGameObjects.RemoveAt(gameObjectIndex);
-            Debug.Log("Max freelocations index: " + (freeLocations.Count - 1));
-            Debug.Log("locationIndex: " + locationIndex);
             freeLocations.RemoveAt(locationIndex);
+            yield return new WaitForSeconds(Random.Range(.5f, 2));
         }
     }
 
-    private void ActivateObstacle(GameObject obstacle, Vector3 location)
+    private void ActivateObject(GameObject go, Vector3 location)
     {
-        Debug.Log("Activating obstacle!");
-        obstacle.transform.position = location;
-        obstacle.transform.rotation = Quaternion.identity;
-        obstacle.SetActive(true);
+        go.transform.position = location;
+        go.transform.rotation = Quaternion.identity;
+        go.SetActive(true);
     }
 }
