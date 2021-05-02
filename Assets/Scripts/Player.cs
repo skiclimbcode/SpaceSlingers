@@ -17,4 +17,13 @@ public class Player : MonoBehaviour
     {
 
     }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Obstacle") {
+            Debug.Log("KABOOM!");
+            Destroy(this.gameObject);
+        }
+    }
+
 }
