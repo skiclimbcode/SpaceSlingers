@@ -8,6 +8,8 @@ public class Obstacle : MonoBehaviour
     private Rigidbody2D rb;
     public float moveSpeed = 2f;
 
+    private bool ShouldBeMoving = true;
+
     void Awake()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
@@ -24,6 +26,16 @@ public class Obstacle : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        rb.velocity = new Vector2(moveSpeed * -1, rb.velocity.y);
+        rb.velocity = ShouldBeMoving ? new Vector2(moveSpeed * -1, rb.velocity.y) : new Vector2(0f, 0f);
+    }
+
+    public void StopMoving()
+    {
+        ShouldBeMoving = false;
+    }
+
+    public void StartMoving()
+    {
+        ShouldBeMoving = true;
     }
 }
