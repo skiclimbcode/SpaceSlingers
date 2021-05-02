@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private Rigidbody2D rb;
+    public GameObject Explosion;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +22,7 @@ public class Player : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Obstacle") {
+            Instantiate (Explosion,transform.position,transform.rotation);
             Debug.Log("KABOOM!");
             Destroy(this.gameObject);
         }
